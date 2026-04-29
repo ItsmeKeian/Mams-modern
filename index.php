@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAMS — Municipality of Hernani</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0d2b55;--navy2:#163d7a;
+  --gold:#d4a20f;--gold2:#f0c040;
+  --white:#fff;--offwhite:#f5f7fb;
+  --text:#0d2b55;--muted:#7a8db0;
+  --border:rgba(13,43,85,0.1);
+  --shadow:0 24px 80px rgba(13,43,85,0.18);
+}
+html,body{
+  min-height:100vh;
+  font-family:'DM Sans',sans-serif;
+  background:var(--offwhite);
+  display:flex;align-items:center;justify-content:center;
+  padding:32px 24px;
+  position:relative;overflow:hidden;
+}
+
+/* BG */
+body::before{
+  content:'';position:fixed;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(13,43,85,0.07) 0%,transparent 70%);
+  top:-200px;left:-200px;pointer-events:none;
+}
+body::after{
+  content:'';position:fixed;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,162,15,0.06) 0%,transparent 70%);
+  bottom:-150px;right:-100px;pointer-events:none;
+}
+.lines{
+  position:fixed;inset:0;
+  background-image:repeating-linear-gradient(
+    0deg,transparent,transparent 80px,
+    rgba(13,43,85,0.025) 80px,rgba(13,43,85,0.025) 81px
+  );pointer-events:none;
+}
+
+/* CARD */
+.card{
+  position:relative;z-index:1;
+  width:100%;max-width:1060px;
+  min-height:640px;
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  animation:rise 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes rise{
+  from{opacity:0;transform:translateY(32px) scale(0.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* LEFT */
+.left{
+  background:var(--navy);
+  display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+}
+.left::before{
+  content:'';position:absolute;
+  width:420px;height:420px;border-radius:50%;
+  background:rgba(212,162,15,0.06);
+  border:1px solid rgba(212,162,15,0.1);
+  bottom:-120px;right:-120px;pointer-events:none;
+}
+.left::after{
+  content:'';position:absolute;
+  width:240px;height:240px;border-radius:50%;
+  background:rgba(255,255,255,0.025);
+  top:-70px;left:-50px;pointer-events:none;
+}
+.dots{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,0.04) 1px,transparent 0);
+  background-size:28px 28px;pointer-events:none;
+}
+
+/* left top bar */
+.ltop{
+  padding:26px 40px;
+  display:flex;align-items:center;gap:14px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  position:relative;z-index:1;
+}
+.ltop-seal{
+  width:42px;height:42px;border-radius:50%;
+  border:2px solid rgba(212,162,15,0.45);
+  overflow:hidden;background:rgba(255,255,255,0.05);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.ltop-seal img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.ltop-info strong{display:block;font-size:13px;color:rgba(255,255,255,0.88);font-weight:600;}
+.ltop-info span{font-size:11px;color:rgba(255,255,255,0.38);letter-spacing:0.3px;}
+
+/* left body */
+.lbody{
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  padding:44px 40px;position:relative;z-index:1;
+}
+.lgu-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--gold2);font-size:10px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;
+}
+.lgu-tag-line{width:24px;height:1.5px;background:var(--gold2);}
+.lbody h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:50px;font-weight:700;
+  color:var(--white);line-height:1.15;margin-bottom:18px;
+}
+.lbody h1 em{font-style:italic;color:var(--gold2);}
+.lbody>p{
+  font-size:13.5px;color:rgba(255,255,255,0.42);
+  line-height:1.85;max-width:380px;margin-bottom:40px;
+}
+.checks{display:flex;flex-direction:column;gap:14px;}
+.chk{display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,0.55);}
+.chk-ico{
+  width:22px;height:22px;border-radius:6px;
+  background:rgba(212,162,15,0.12);border:1px solid rgba(212,162,15,0.28);
+  color:var(--gold2);font-size:11px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+
+/* left bottom */
+.lbot{
+  padding:20px 40px;
+  border-top:1px solid rgba(255,255,255,0.07);
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:1;
+}
+.lbot-info{display:flex;align-items:center;gap:10px;}
+.lbot-seal{width:30px;height:30px;border-radius:50%;overflow:hidden;border:1px solid rgba(212,162,15,0.3);}
+.lbot-seal img{width:100%;height:100%;object-fit:cover;}
+.lbot-text strong{display:block;font-size:12px;color:rgba(255,255,255,0.55);font-weight:600;}
+.lbot-text span{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.3px;}
+.online{
+  display:flex;align-items:center;gap:6px;
+  font-size:10.5px;color:rgba(255,255,255,0.32);
+}
+.online::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,0.6);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* RIGHT */
+.right{
+  background:var(--white);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:52px 48px;position:relative;
+}
+.right::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2),var(--navy));
+}
+.right::after{
+  content:'';position:absolute;
+  left:0;top:15%;bottom:15%;width:3px;
+  background:linear-gradient(to bottom,transparent,var(--gold) 35%,var(--gold2) 65%,transparent);
+  border-radius:2px;
+}
+
+/* logo area */
+.logo-area{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:36px;padding-bottom:28px;
+  border-bottom:1px solid var(--border);
+}
+.logo-wrap{
+  width:68px;height:68px;border-radius:50%;
+  border:2.5px solid var(--gold);padding:3px;
+  box-shadow:0 4px 18px rgba(212,162,15,0.2);
+  flex-shrink:0;overflow:hidden;background:var(--navy);
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+}
+.logo-wrap img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+.logo-text h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:19px;font-weight:700;color:var(--navy);line-height:1.2;
+}
+.logo-text p{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px;}
+.mams-tag{
+  display:inline-block;background:var(--navy);color:var(--white);
+  font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:3px 10px;border-radius:3px;margin-top:7px;
+}
+
+/* form */
+.form-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:700;color:var(--navy);
+  margin-bottom:6px;line-height:1.2;
+}
+.form-sub{font-size:13px;color:var(--muted);margin-bottom:30px;line-height:1.6;}
+
+/* error */
+.alert-error{
+  display:flex;align-items:center;gap:10px;
+  background:#fef0ee;border:1px solid #f5c6c0;
+  border-left:3px solid #c0392b;border-radius:10px;
+  padding:12px 16px;margin-bottom:20px;
+  font-size:13px;color:#c0392b;
+  animation:shake 0.4s ease;
+}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+
+/* fields */
+.fg{margin-bottom:18px;}
+.flabel{
+  display:block;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:1.2px;
+  color:var(--navy);margin-bottom:7px;
+}
+.fw{position:relative;}
+.fi{
+  position:absolute;left:15px;top:50%;transform:translateY(-50%);
+  font-size:15px;color:var(--muted);pointer-events:none;
+}
+.finput{
+  width:100%;height:50px;padding:0 48px;
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  color:var(--text);background:var(--offwhite);
+  border:1.5px solid var(--border);border-radius:10px;
+  outline:none;transition:all 0.2s;
+}
+.finput:focus{
+  border-color:var(--navy);background:var(--white);
+  box-shadow:0 0 0 3px rgba(13,43,85,0.08);
+}
+.finput::placeholder{color:var(--muted);}
+.feye{
+  position:absolute;right:13px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;
+  color:var(--muted);font-size:15px;transition:color 0.2s;padding:4px;
+}
+.feye:hover{color:var(--navy);}
+
+/* btn */
+.btn{
+  width:100%;height:52px;
+  background:var(--navy);color:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;
+  border:none;border-radius:10px;cursor:pointer;
+  margin-top:6px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  position:relative;overflow:hidden;transition:all 0.25s;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,0.07) 0%,transparent 100%);
+}
+.btn-arr{
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,0.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;transition:transform 0.2s;
+}
+.btn:hover{
+  background:var(--navy2);transform:translateY(-1px);
+  box-shadow:0 10px 28px rgba(13,43,85,0.22);
+}
+.btn:hover .btn-arr{transform:translateX(3px);}
+.btn:active{transform:none;}
+.btn-ul{
+  height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  border-radius:0 0 10px 10px;opacity:0.5;margin-top:-2px;
+}
+
+/* footer */
+.ffoot{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:24px;padding-top:20px;border-top:1px solid var(--border);
+}
+.ffoot-left{font-size:10.5px;color:var(--muted);line-height:1.7;}
+.ffoot-left strong{color:var(--navy);}
+.secure{
+  display:flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:600;color:#155724;
+  background:rgba(21,87,36,0.07);padding:5px 12px;
+  border-radius:100px;
+}
+</style>
+</head>
+<body>
+<div class="lines"></div>
+
+<div class="card">
+
+  <!-- LEFT -->
+  <div class="left">
+    <div class="dots"></div>
+
+    <div class="ltop">
+      <div class="ltop-seal">
+        <img src="logo.jpg" alt="Seal" onerror="this.parentElement.innerHTML='🏛️'">
+      </div>
+      <div class="ltop-info">
+        <strong>Municipality of Hernani</strong>
+        <span>Eastern Samar · Region VIII · Philippines</span>
+      </div>
+    </div>
+
+    <div class="lbody">
+      <div class="lgu-tag"><div class="lgu-tag-line"></div>Official LGU Portal</div>
+      <h1>Aid &amp; <em>Monitoring</em><br>System</h1>
+      <p>Empowering the MSWDO of Hernani with a smarter, faster, and more transparent way to manage aid and beneficiary records.</p>
+      <div class="checks">
+        <div class="chk"><div class="chk-ico">✓</div>DSWD FACED-aligned beneficiary registration</div>
+        <div class="chk"><div class="chk-ico">✓</div>Real-time aid distribution tracking and analytics</div>
+        <div class="chk"><div class="chk-ico">✓</div>Automated FACED form generation and printing</div>
+        <div class="chk"><div class="chk-ico">✓</div>Role-based access with complete audit trail</div>
+        <div class="chk"><div class="chk-ico">✓</div>Excel export and report generation by barangay</div>
+      </div>
+    </div>
+
+    <div class="lbot">
+      <div class="lbot-info">
+        <div class="lbot-seal"><img src="logo.jpg" alt="Seal" onerror="this.style.display='none'"></div>
+        <div class="lbot-text">
+          <strong>Municipality of Hernani</strong>
+          <span>Eastern Samar · Region VIII · Philippines</span>
+        </div>
+      </div>
+      <div class="online">System Online</div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+
+    <div class="logo-area">
+      <div class="logo-wrap">
+        <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'">
+      </div>
+      <div class="logo-text">
+        <h2>Municipality<br>of Hernani</h2>
+        <p>Eastern Samar</p>
+        <div class="mams-tag">MAMS Portal</div>
+      </div>
+    </div>
+
+    <?php if(!empty($error)): ?>
+    <div class="alert-error"><span>⚠</span><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
+
+    <div class="form-title">Welcome back,<br>sign in below.</div>
+    <div class="form-sub">Access is restricted to authorized municipal personnel only.</div>
+
+    <form method="POST" action="">
+      <div class="fg">
+        <label class="flabel">Username</label>
+        <div class="fw">
+          <span class="fi">👤</span>
+          <input type="text" name="username" class="finput" placeholder="Enter your username"
+            value="<?= htmlspecialchars($_POST['username'] ?? '') ?>" autocomplete="username" required>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="flabel">Password</label>
+        <div class="fw">
+          <span class="fi">🔒</span>
+          <input type="password" name="password" id="pwdInput" class="finput"
+            placeholder="Enter your password" autocomplete="current-password" required>
+          <button type="button" class="feye" id="eyeBtn" onclick="togglePwd()">👁️</button>
+        </div>
+      </div>
+      <button type="submit" class="btn">Sign In to MAMS<div class="btn-arr">→</div></button>
+      <div class="btn-ul"></div>
+    </form>
+
+    <div class="ffoot">
+      <div class="ffoot-left">
+        <strong>MAMS</strong> · Municipal Aid &amp; Monitoring System<br>
+        Municipality of Hernani · Authorized Personnel Only
+      </div>
+      <div class="secure">🔒 Secure</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function togglePwd(){
+  const i=document.getElementById('pwdInput');
+  const b=document.getElementById('eyeBtn');
+  if(i.type==='password'){i.type='text';b.textContent='🙈';}
+  else{i.type='password';b.textContent='👁️';}
+}
+</script>
+</body>
+</html>
