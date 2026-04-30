@@ -75,21 +75,20 @@
     <div class="form-title">Welcome back,<br>sign in below.</div>
     <div class="form-sub">Access is restricted to authorized municipal personnel only.</div>
 
-    <form method="POST" action="">
+    <form id="loginForm">
       <div class="fg">
         <label class="flabel">Username</label>
         <div class="fw">
           <span class="fi">👤</span>
-          <input type="text" name="username" class="finput" placeholder="Enter your username"
-            value="<?= htmlspecialchars($_POST['username'] ?? '') ?>" autocomplete="username" required>
+          <input type="text" name="username" id="username" class="finput" placeholder="Enter your username">
         </div>
       </div>
       <div class="fg">
         <label class="flabel">Password</label>
         <div class="fw">
           <span class="fi">🔒</span>
-          <input type="password" name="password" id="pwdInput" class="finput"
-            placeholder="Enter your password" autocomplete="current-password" required>
+          <input type="password" name="password" id="password" class="finput"
+            placeholder="Enter your password">
           <button type="button" class="feye" id="eyeBtn" onclick="togglePwd()">👁️</button>
         </div>
       </div>
@@ -107,14 +106,51 @@
 
   </div>
 </div>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/jquery-4.0.0.min.js"></script>
 
 <script>
-function togglePwd(){
-  const i=document.getElementById('pwdInput');
-  const b=document.getElementById('eyeBtn');
-  if(i.type==='password'){i.type='text';b.textContent='🙈';}
-  else{i.type='password';b.textContent='👁️';}
-}
-</script>
+
+            $("#loginForm").submit(function(e){
+
+                e.preventDefault();
+
+                $.ajax({
+
+                    url: "php/login.php",
+                    type: "POST",
+                    data: $(this).serialize(),
+
+                    success: function(res){
+
+                        let data = JSON.parse(res);
+
+                        if(data.status === "success"){
+
+                            if(data.role === "admin"){
+
+                                window.location = "admin/dashboard.php";
+
+                            } else {
+
+                                window.location = "user/dashboard.php";
+
+                            }
+
+                        }else{
+
+                            alert(data.message);
+
+                        }
+
+                    }
+
+                });
+
+            });
+
+
+
+    </script>
 </body>
 </html>
